@@ -14,11 +14,14 @@ import {
 
 import Button from '@/components/ui/Button';
 import TaskDetail from '@/components/tasks/TaskDetail';
-
 import {
   Task,
   TaskStatus,
-} from '@/components/tasks/TaskRow';
+} from '@/types/task';
+// import {
+//   Task,
+//   TaskStatus,
+// } from '@/components/tasks/TaskRow';
 
 import {
   authFetch,

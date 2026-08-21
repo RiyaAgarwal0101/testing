@@ -28,7 +28,7 @@ export interface AuthResponse {
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:3001';
+  'http://localhost:4000/api';
 
 const TOKEN_KEY = 'task-manager-access-token';
 
@@ -121,12 +121,11 @@ export async function login(
 
   return data;
 }
-
 export async function guestLogin(
   payload: GuestLoginPayload = {},
 ): Promise<AuthResponse> {
   const response = await fetch(
-    `${API_URL}/auth/guest-login`,
+    `${API_URL}/auth/guest`,
     {
       method: 'POST',
       headers: {
@@ -137,12 +136,37 @@ export async function guestLogin(
   );
 
   const data =
-    await parseResponse<AuthResponse>(response);
+    await parseResponse<AuthResponse>(
+      response,
+    );
 
-  setAccessToken(data.accessToken);
+  setAccessToken(
+    data.accessToken,
+  );
 
   return data;
 }
+// export async function guestLogin(
+//   payload: GuestLoginPayload = {},
+// ): Promise<AuthResponse> {
+//   const response = await fetch(
+//     `${API_URL}/auth/guest`,
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(payload),
+//     },
+//   );
+
+//   const data =
+//     await parseResponse<AuthResponse>(response);
+
+//   setAccessToken(data.accessToken);
+
+//   return data;
+// }
 
 export async function getCurrentUser(): Promise<AuthUser> {
   const token = getAccessToken();

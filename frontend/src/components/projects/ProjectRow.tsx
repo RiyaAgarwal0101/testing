@@ -3,24 +3,26 @@
 import Badge from '@/components/ui/Badge';
 
 export type ProjectPriority =
-  | 'no_priority'
+  | 'none'
   | 'urgent'
   | 'high'
   | 'medium'
   | 'low';
-
-export interface Project {
-  _id: string;
-  ownerId?: string;
-  name: string;
-  desc?: string;
-  color?: string;
-  private?: boolean;
-  priority?: ProjectPriority;
-  dueDate?: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import {
+  Project,
+} from '@/types/project';
+// export interface Project {
+//   _id: string;
+//   ownerId?: string;
+//   name: string;
+//   desc?: string;
+//   color?: string;
+//   private?: boolean;
+//   priority?: ProjectPriority;
+//   dueDate?: string;
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
 
 interface ProjectRowProps {
   project: Project;
@@ -36,7 +38,7 @@ const priorityConfig: Record<
     variant: 'default' | 'success' | 'warning' | 'danger' | 'info';
   }
 > = {
-  no_priority: {
+  none: {
     label: 'No Priority',
     variant: 'default',
   },
@@ -88,7 +90,7 @@ export default function ProjectRow({
 }: ProjectRowProps) {
   const priority =
     priorityConfig[
-      project.priority || 'no_priority'
+      project.priority || 'none'
     ];
 
   return (
@@ -122,7 +124,7 @@ export default function ProjectRow({
             {project.name}
           </span>
 
-          {project.private && (
+          {project.isPrivate && (
             <span className="mt-0.5 block text-[10px] text-neutral-400">
               Private
             </span>

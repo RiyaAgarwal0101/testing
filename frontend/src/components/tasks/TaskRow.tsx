@@ -9,38 +9,42 @@ import {
   formatShortDate,
   isOverdue,
 } from '@/lib/utils';
+import {
+  Task,
+  TaskStatus,
+  TaskPriority,
+} from '@/types/task';
+// export type TaskStatus =
+//   | 'todo'
+//   | 'doing'
+//   | 'completed';
 
-export type TaskStatus =
-  | 'todo'
-  | 'in_progress'
-  | 'completed';
+// export type TaskPriority =
+//   | 'none'
+//   | 'urgent'
+//   | 'high'
+//   | 'medium'
+//   | 'low';
 
-export type TaskPriority =
-  | 'no_priority'
-  | 'urgent'
-  | 'high'
-  | 'medium'
-  | 'low';
+// export interface TaskMember {
+//   _id: string;
+//   name: string;
+//   avatar?: string | null;
+// }
 
-export interface TaskMember {
-  _id: string;
-  name: string;
-  avatar?: string | null;
-}
-
-export interface Task {
-  _id: string;
-  projectId?: string;
-  title: string;
-  description?: string;
-  status: TaskStatus;
-  priority?: TaskPriority;
-  dueDate?: string;
-  members?: TaskMember[];
-  labels?: string[];
-  createdAt?: string;
-  updatedAt?: string;
-}
+// export interface Task {
+//   _id: string;
+//   projectId?: string;
+//   title: string;
+//   description?: string;
+//   status: TaskStatus;
+//   priority?: TaskPriority;
+//   dueDate?: string;
+//   members?: TaskMember[];
+//   labels?: string[];
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
 
 interface TaskRowProps {
   task: Task;
@@ -63,7 +67,7 @@ const priorityConfig: Record<
       | 'danger';
   }
 > = {
-  no_priority: {
+  none: {
     label: 'No Priority',
     variant: 'default',
   },
@@ -94,9 +98,9 @@ function getPriority(
 ) {
   return (
     priorityConfig[
-      priority || 'no_priority'
+      priority || 'none'
     ] ||
-    priorityConfig.no_priority
+    priorityConfig.none
   );
 }
 

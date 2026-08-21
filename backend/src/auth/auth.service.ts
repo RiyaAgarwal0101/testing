@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
+import { Body } from '@nestjs/common';
+import { GuestLoginDto } from './dto/guest-login.dto';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -10,20 +11,38 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async guestLogin() {
-    const user = await this.usersService.createGuest();
+  // async guestLogin() {
+  //   const user = await this.usersService.createGuest();
 
-    const token = await this.jwtService.signAsync({
+  //   const token = await this.jwtService.signAsync({
+  //     sub: user.userId,
+  //     isGuest: true,
+  //   });
+
+  //   return {
+  //     accessToken: token,
+  //     user,
+  //   };
+  // }
+async guestLogin(
+  name?: string,
+) {
+  const user =
+    await this.usersService.createGuest(
+      name,
+    );
+
+  const token =
+    await this.jwtService.signAsync({
       sub: user.userId,
       isGuest: true,
     });
 
-    return {
-      token,
-      user,
-    };
-  }
-
+  return {
+    accessToken: token,
+    user,
+  };
+}
   async getUser(userId: string) {
     return this.usersService.findByUserId(userId);
   }

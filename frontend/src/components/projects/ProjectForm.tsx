@@ -30,28 +30,42 @@ interface ProjectFormProps {
   ) => void | Promise<void>;
   onCancel?: () => void;
 }
-
 interface FormState {
   name: string;
-  desc: string;
+  description: string;
   color: string;
-  private: boolean;
+  isPrivate: boolean;
   priority: ProjectPriority;
   dueDate: string;
 }
+// interface FormState {
+//   name: string;
+//   desc: string;
+//   color: string;
+//   private: boolean;
+//   priority: ProjectPriority;
+//   dueDate: string;
+// }
 
+// const defaultForm: FormState = {
+//   name: '',
+//   desc: '',
+//   color: '#171717',
+//   private: false,
+//   priority: 'no_priority',
+//   dueDate: '',
+// };
 const defaultForm: FormState = {
   name: '',
-  desc: '',
+  description: '',
   color: '#171717',
-  private: false,
-  priority: 'no_priority',
+  isPrivate: false,
+  priority: 'none',
   dueDate: '',
 };
-
 const priorityOptions = [
   {
-    value: 'no_priority',
+    value: 'none',
     label: 'No Priority',
   },
   {
@@ -91,11 +105,14 @@ export default function ProjectForm({
 
     setForm({
       name: project.name || '',
-      desc: project.desc || '',
+      description: project.description || '',
+      // desc: project.desc || '',
       color: project.color || '#171717',
-      private: project.private || false,
+      isPrivate:
+  project.isPrivate || false,
+      // private: project.private || false,
       priority:
-        project.priority || 'no_priority',
+        project.priority || 'none',
       dueDate: project.dueDate
         ? project.dueDate.slice(0, 10)
         : '',
@@ -135,7 +152,9 @@ export default function ProjectForm({
       await onSubmit({
         ...form,
         name: form.name.trim(),
-        desc: form.desc.trim(),
+         description:
+    form.description.trim(),
+        // desc: form.desc.trim(),
       });
     } catch (err) {
       setError(

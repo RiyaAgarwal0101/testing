@@ -73,7 +73,7 @@ const priorityConfig: Record<
       | 'danger';
   }
 > = {
-  no_priority: {
+  none: {
     label: 'No Priority',
     variant: 'default',
   },
@@ -115,7 +115,7 @@ export default function TaskDetail({
 
   const priority =
     priorityConfig[
-      task.priority || 'no_priority'
+      task.priority || 'none'
     ];
 
   async function handleComment(

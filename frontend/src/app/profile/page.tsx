@@ -271,10 +271,15 @@ export default function ProfilePage() {
           {/* Form */}
           <div className="px-5 py-5">
             <ProfileForm
+  profile={user}
+  onSubmit={handleSubmit}
+  loading={saving}
+/>
+            {/* <ProfileForm
               user={user}
               onSubmit={handleSubmit}
               loading={saving}
-            />
+            /> */}
           </div>
         </section>
 

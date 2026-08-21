@@ -8,27 +8,46 @@ import {
 import Button from '@/components/ui/Button';
 import Dropdown from '@/components/ui/Dropdown';
 
-import ProjectRow, {
-  Project,
-  ProjectPriority,
-} from './ProjectRow';
+import ProjectRow from './ProjectRow';
 
+import {
+  Project,
+} from '@/types/project';
+
+// import ProjectRow, {
+//   Project,
+//   ProjectPriority,
+// } from './ProjectRow';
+
+// interface ProjectListProps {
+//   projects: Project[];
+//   loading?: boolean;
+//   onAddProject?: () => void;
+//   onProjectClick?: (project: Project) => void;
+//   onEditProject?: (project: Project) => void;
+//   onDeleteProject?: (project: Project) => void;
+// }
 interface ProjectListProps {
   projects: Project[];
   loading?: boolean;
   onAddProject?: () => void;
-  onProjectClick?: (project: Project) => void;
-  onEditProject?: (project: Project) => void;
-  onDeleteProject?: (project: Project) => void;
+  onProjectClick?: (
+    project: Project,
+  ) => void;
+  onEdit?: (
+    project: Project,
+  ) => void;
+  onDelete?: (
+    project: Project,
+  ) => void;
 }
-
 const priorityOptions = [
   {
     value: 'all',
     label: 'All priorities',
   },
   {
-    value: 'no_priority',
+    value: 'none',
     label: 'No Priority',
   },
   {
@@ -54,8 +73,8 @@ export default function ProjectList({
   loading = false,
   onAddProject,
   onProjectClick,
-  onEditProject,
-  onDeleteProject,
+  onEdit,
+  onDelete,
 }: ProjectListProps) {
   const [search, setSearch] = useState('');
   const [priority, setPriority] =
@@ -67,7 +86,7 @@ export default function ProjectList({
         project.name
           .toLowerCase()
           .includes(search.toLowerCase()) ||
-        project.desc
+        project.description
           ?.toLowerCase()
           .includes(search.toLowerCase());
 
@@ -258,8 +277,8 @@ export default function ProjectList({
                   key={project._id}
                   project={project}
                   onClick={onProjectClick}
-                  onEdit={onEditProject}
-                  onDelete={onDeleteProject}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
                 />
               ))}
 

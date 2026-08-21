@@ -12,12 +12,16 @@ import {
   authFetch,
   getApiUrl,
 } from '@/lib/auth';
-
 import {
   Task,
   TaskPriority,
   TaskStatus,
-} from '@/components/tasks/TaskRow';
+} from '@/types/task';
+// import {
+//   Task,
+//   TaskPriority,
+//   TaskStatus,
+// } from '@/components/tasks/TaskRow';
 
 export interface CreateTaskPayload {
   title: string;

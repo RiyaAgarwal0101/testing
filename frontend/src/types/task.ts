@@ -1,42 +1,62 @@
-// frontend/src/types/task.ts
-
 export type TaskStatus =
   | 'todo'
-  | 'in_progress'
-  | 'completed';
+  | 'doing'
+  | 'completed'
+  | 'onhold';
 
 export type TaskPriority =
-  | 'no_priority'
+  | 'none'
   | 'urgent'
   | 'high'
   | 'medium'
   | 'low';
 
-export interface TaskMember {
-  _id: string;
-  name: string;
-  email?: string;
-  avatar?: string | null;
+export interface TaskComment {
+  userId: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface TaskSubtask {
+  title: string;
+  completed: boolean;
 }
 
 export interface Task {
   _id: string;
-  projectId: string;
+
   title: string;
+
   description?: string;
+
   status: TaskStatus;
-  priority?: TaskPriority;
+
+  priority: TaskPriority;
+
+  ownerId: string;
+
+  projectId: string;
+
+  assigneeId: string;
+
+  labels: string[];
+
   dueDate?: string;
-  members?: TaskMember[];
-  labels?: string[];
+
+  subtasks: TaskSubtask[];
+
+  comments: TaskComment[];
+
   createdAt?: string;
+
   updatedAt?: string;
 }
+// // frontend/src/types/task.ts
+
 // export type TaskStatus =
 //   | 'todo'
 //   | 'doing'
-//   | 'completed'
-//   | 'onhold';
+//   | 'completed';
 
 // export type TaskPriority =
 //   | 'none'
@@ -45,24 +65,57 @@ export interface Task {
 //   | 'medium'
 //   | 'low';
 
+// export interface TaskMember {
+//   _id: string;
+//   name: string;
+//   email?: string;
+//   avatar?: string | null;
+// }
+
 // export interface Task {
 //   _id: string;
-//   title: string;
-//   description: string;
-//   status: TaskStatus;
-//   priority: TaskPriority;
-//   ownerId: string;
 //   projectId: string;
-//   assigneeId: string;
-//   labels: string[];
+//   title: string;
+//   description?: string;
+//   status: TaskStatus;
+//   priority?: TaskPriority;
 //   dueDate?: string;
-//   subtasks: {
-//     title: string;
-//     completed: boolean;
-//   }[];
-//   comments: {
-//     userId: string;
-//     text: string;
-//     createdAt: string;
-//   }[];
+//   members?: TaskMember[];
+//   labels?: string[];
+//   createdAt?: string;
+//   updatedAt?: string;
 // }
+// // export type TaskStatus =
+// //   | 'todo'
+// //   | 'doing'
+// //   | 'completed'
+// //   | 'onhold';
+
+// // export type TaskPriority =
+// //   | 'none'
+// //   | 'urgent'
+// //   | 'high'
+// //   | 'medium'
+// //   | 'low';
+
+// // export interface Task {
+// //   _id: string;
+// //   title: string;
+// //   description: string;
+// //   status: TaskStatus;
+// //   priority: TaskPriority;
+// //   ownerId: string;
+// //   projectId: string;
+// //   assigneeId: string;
+// //   labels: string[];
+// //   dueDate?: string;
+// //   subtasks: {
+// //     title: string;
+// //     completed: boolean;
+// //   }[];
+// //   comments: {
+// //     userId: string;
+// //     text: string;
+// //     createdAt: string;
+// //   }[];
+// // }
