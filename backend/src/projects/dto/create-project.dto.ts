@@ -1,5 +1,6 @@
 import {
   IsBoolean,
+  IsDateString,
   IsEnum,
   IsOptional,
   IsString,
@@ -7,7 +8,9 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { ProjectPriority } from '../schemas/project.schema';
+import {
+  ProjectPriority,
+} from '../schemas/project.schema';
 
 export class CreateProjectDto {
   @IsString()
@@ -31,9 +34,14 @@ export class CreateProjectDto {
   @IsOptional()
   @IsBoolean()
   isPrivate?: boolean;
+
+  @IsOptional()
+  @IsDateString()
+  dueDate?: string;
 }
 
 // import {
+//   IsBoolean,
 //   IsEnum,
 //   IsOptional,
 //   IsString,
@@ -41,13 +49,7 @@ export class CreateProjectDto {
 //   MinLength,
 // } from 'class-validator';
 
-// export enum ProjectPriority {
-//   NO_PRIORITY = 'no_priority',
-//   URGENT = 'urgent',
-//   HIGH = 'high',
-//   MEDIUM = 'medium',
-//   LOW = 'low',
-// }
+// import { ProjectPriority } from '../schemas/project.schema';
 
 // export class CreateProjectDto {
 //   @IsString()
@@ -69,15 +71,12 @@ export class CreateProjectDto {
 //   color?: string;
 
 //   @IsOptional()
-//   memberIds?: string[];
+//   @IsBoolean()
+//   isPrivate?: boolean;
 // }
 
-
 // // import {
-// //   IsBoolean,
-// //   IsDateString,
 // //   IsEnum,
-// //   IsHexColor,
 // //   IsOptional,
 // //   IsString,
 // //   MaxLength,
@@ -100,22 +99,65 @@ export class CreateProjectDto {
 
 // //   @IsOptional()
 // //   @IsString()
-// //   @MaxLength(1000)
-// //   desc?: string;
-
-// //   @IsOptional()
-// //   @IsHexColor()
-// //   color?: string;
-
-// //   @IsOptional()
-// //   @IsBoolean()
-// //   private?: boolean;
+// //   @MaxLength(500)
+// //   description?: string;
 
 // //   @IsOptional()
 // //   @IsEnum(ProjectPriority)
 // //   priority?: ProjectPriority;
 
 // //   @IsOptional()
-// //   @IsDateString()
-// //   dueDate?: string;
+// //   @IsString()
+// //   color?: string;
+
+// //   @IsOptional()
+// //   memberIds?: string[];
 // // }
+
+
+// // // import {
+// // //   IsBoolean,
+// // //   IsDateString,
+// // //   IsEnum,
+// // //   IsHexColor,
+// // //   IsOptional,
+// // //   IsString,
+// // //   MaxLength,
+// // //   MinLength,
+// // // } from 'class-validator';
+
+// // // export enum ProjectPriority {
+// // //   NO_PRIORITY = 'no_priority',
+// // //   URGENT = 'urgent',
+// // //   HIGH = 'high',
+// // //   MEDIUM = 'medium',
+// // //   LOW = 'low',
+// // // }
+
+// // // export class CreateProjectDto {
+// // //   @IsString()
+// // //   @MinLength(1)
+// // //   @MaxLength(100)
+// // //   name: string;
+
+// // //   @IsOptional()
+// // //   @IsString()
+// // //   @MaxLength(1000)
+// // //   desc?: string;
+
+// // //   @IsOptional()
+// // //   @IsHexColor()
+// // //   color?: string;
+
+// // //   @IsOptional()
+// // //   @IsBoolean()
+// // //   private?: boolean;
+
+// // //   @IsOptional()
+// // //   @IsEnum(ProjectPriority)
+// // //   priority?: ProjectPriority;
+
+// // //   @IsOptional()
+// // //   @IsDateString()
+// // //   dueDate?: string;
+// // // }
